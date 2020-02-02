@@ -19,6 +19,17 @@ var (
 	jpgContentType  = []string{"image/jpeg"}
 )
 
+// Error is a generic error struct usable for responses
+type Error struct {
+	Error string `json:"error"`
+	Code  int    `json:"code"`
+}
+
+// NewError is a helper method for returning an Error object
+func NewError(msg string, code int) Error {
+	return Error{msg, code}
+}
+
 // HTML writes a string to the Writer with a HTML content type
 func HTML(w http.ResponseWriter, statusCode int, html string) error {
 	w.WriteHeader(statusCode)
